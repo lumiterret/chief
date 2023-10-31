@@ -9,7 +9,7 @@
     @vite(['resources/css/app.css'])
     <title>{{ config('app.name', 'Laravel') }}</title>
 </head>
-<body>
+<body class="d-flex align-items-center py-4 bg-body-tertiary flex-column min-vh-100">
 <main>
     @yield('main')
 </main>
