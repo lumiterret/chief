@@ -11,11 +11,32 @@
 </head>
 <body class="d-flex flex-column h-100">
 @include('layouts.partials.header')
-<div>
+@if (session('success'))
+    <div class="container alert alert-success text-center">
+        {{ session('success') }}
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+@if (session('danger'))
+    <div class="container alert alert-danger text-center">
+        {{ session('danger') }}
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
     <main>
         @yield('content')
     </main>
-</div>
 @include('layouts.partials.footer')
+{{--<script>
+    window.onload = function() {
+        if (window.$) {
+            // jQuery is loaded
+            console.log("Yeah!");
+        } else {
+            // jQuery is not loaded
+            console.log("Doesn't Work");
+        }
+    };
+</script>--}}
 </body>
 </html>
