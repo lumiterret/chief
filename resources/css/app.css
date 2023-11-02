@@ -1,1 +1,6 @@
 @import "bootstrap";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+.navbar-brand {
+    margin-right: 3rem;
+}

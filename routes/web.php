@@ -26,4 +26,23 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/auth/logout', [Controllers\Auth\LoginController::class, 'logout'])
         ->name('logout');
+
+
+    Route::prefix('ingredients/')->group(function () {
+        Route::get('', [Controllers\IngredientController::class, 'index'])
+            ->name('ingredients.index');
+        Route::post('', [Controllers\IngredientController::class, 'store'])
+            ->name('ingredients.store');
+        Route::get('create', [Controllers\IngredientController::class, 'create'])
+            ->name('ingredients.create');
+        Route::get('{ingredient}/show', [Controllers\IngredientController::class, 'show'])
+            ->name('ingredients.show');
+        Route::get('{ingredient}/edit', [Controllers\IngredientController::class, 'edit'])
+            ->name('ingredients.edit');
+        Route::post('{ingredient}', [Controllers\IngredientController::class, 'update'])
+            ->name('ingredients.update');
+        Route::get('{ingredient}/delete', [Controllers\IngredientController::class, 'destroy'])
+            ->name('ingredients.destroy');
+    });
+
 });
