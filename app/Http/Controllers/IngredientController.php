@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreIngredientRequest;
 use App\Http\Requests\UpdateIngredientRequest;
 use App\Models\Ingredient;
+use App\Models\Recipe;
 
 class IngredientController extends Controller
 {
@@ -42,7 +43,8 @@ class IngredientController extends Controller
      */
     public function show(Ingredient $ingredient)
     {
-        return view('ingredients.show', ['ingredient' => $ingredient]);
+        $recipes = $ingredient->recipes()->get();
+        return view('ingredients.show', compact('ingredient', 'recipes'));
     }
 
     /**

@@ -6,17 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Ingredient extends Model
+class Recipe extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'name',
-        'description',
+        'instructions',
     ];
 
-    public function recipes()
+    public function ingredients()
     {
-        return $this->belongsToMany(Recipe::class);
+        return $this->belongsToMany(Ingredient::class)
+            ->withPivot('note');
     }
+
 }

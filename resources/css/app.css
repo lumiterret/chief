@@ -4,3 +4,11 @@
 .navbar-brand {
     margin-right: 3rem;
 }
+.badge.tag {
+    color: white;
+    background-color: #218838;
+}
+.badge-secondary {
+    color: #fff;
+    background-color: #6c757d;
+}

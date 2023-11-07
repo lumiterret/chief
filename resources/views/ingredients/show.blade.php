@@ -22,6 +22,14 @@
                 @else
                     <p class="card-text">Описание не добавлено</p>
                 @endif
+                @if($recipes)
+                    <hr>
+                    @foreach($recipes as $recipe)
+                        <ul>
+                            <li><a href="{{ route('recipes.show', $recipe->id) }}">{{ $recipe->name }}</a></li>
+                        </ul>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>

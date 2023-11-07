@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/auth/logout', [Controllers\Auth\LoginController::class, 'logout'])
         ->name('logout');
 
+//    Route::resource('ingredients', Controllers\IngredientController::class);
 
     Route::prefix('ingredients/')->group(function () {
         Route::get('', [Controllers\IngredientController::class, 'index'])
@@ -45,4 +46,20 @@ Route::middleware('auth')->group(function () {
             ->name('ingredients.destroy');
     });
 
+    Route::prefix('recipes')->group(function () {
+        Route::get('/', [Controllers\RecipeController::class, 'index'])
+            ->name('recipes.index');
+        Route::post('', [Controllers\RecipeController::class, 'store'])
+            ->name('recipes.store');
+        Route::get('/create', [Controllers\RecipeController::class, 'create'])
+            ->name('recipes.create');
+        Route::get('/{recipe}/show', [Controllers\RecipeController::class, 'show'])
+            ->name('recipes.show');
+        Route::get('/{recipe}/edit', [Controllers\RecipeController::class, 'edit'])
+            ->name('recipes.edit');
+        Route::post('/{recipe}', [Controllers\RecipeController::class, 'update'])
+            ->name('recipes.update');
+        Route::get('/{recipe}/delete', [Controllers\RecipeController::class, 'destroy'])
+            ->name('recipes.destroy');
+    });
 });
