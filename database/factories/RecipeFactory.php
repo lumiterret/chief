@@ -16,8 +16,13 @@ class RecipeFactory extends Factory
      */
     public function definition(): array
     {
+        $instructions = $this->faker->sentence(3) . PHP_EOL;
+        for($i = 0; $i <=3; $i++ ) {
+            $instructions .= $this->faker->paragraph(random_int(2, 6));
+        }
         return [
-            'name'
+            'name' => $this->faker->sentence(3),
+            'instructions' => $instructions
         ];
     }
 }
