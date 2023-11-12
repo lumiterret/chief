@@ -11,29 +11,27 @@ import.meta.glob([
 
 $(document).ready(function () {
     console.log('ready')
-    var i = 0;
-    $('.input-group > button.add-collection-widget').on('click',function (){
-        ++i;
-        var inputGroup =
-            '<div class="row input-group mb-3">' +
-            '<div class="col-sm-5 mx-0">'+
-                '<input type="text" id="recipe_ingredients_0_name" name="recipe[ingredients]['+ i +
-                '][name]" class="form-control-sm form-control" placeholder="Название ингредиента" value="">' +
-            '</div>'+
-            '<div class="col-sm-5 mx-0">'+
-                '<input type="text" id="recipe_ingredients_0_note" name="recipe[ingredients]['+ i +
-                '][note]" placeholder="Заметка" class="form-control-sm form-control" value="">' +
-            '</div>'+
-            '<div class="col-2">'+
-                '<button type="button" class="btn btn-danger btn-sm delete-collection-widget ">'+
-                    '<i class="fas fa-minus-circle"></i>&nbsp;'+
-                '</button>'+
-            '</div>'+
-        '</div>';
-        $('.form-recipe-ingredients').append(inputGroup);
+    var ingredientCount = 0;
+
+    function appendIngredientInput(name='', notes='') {
+        var ingredientDiv = $('<div class="input-group mb-2"></div>');
+
+        var nameInput = $('<input type="text" name="ingredients[' + ingredientCount + '][name]" class="form-control mt-1" placeholder="Наименование" value="' + name + '" required>');
+        var notesInput = $('<input type="text" name="ingredients[' + ingredientCount + '][notes]" class="form-control mt-1" placeholder="Заметки" value="' + notes + '">');
+
+        var removeButton = $('<button type="button" class="btn btn-danger mt-1">Remove</button>');
+        removeButton.click(function() {
+            ingredientDiv.remove();
+        });
+
+        ingredientDiv.append(nameInput, notesInput, removeButton);
+        $('#ingredients').append(ingredientDiv);
+
+        ingredientCount++;
+    }
+
+    $('#addIngredientButton').click(function() {
+        appendIngredientInput();
     });
 
-    $(document).on('click', '.delete-collection-widget', function(){
-        $(this).parent('div').parent('div').remove();
-    });
 });

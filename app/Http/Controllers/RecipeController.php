@@ -31,15 +31,12 @@ class RecipeController extends Controller
      */
     public function store(StoreRecipeRequest $request)
     {
-        $validated = $request->validated('recipe');
+        $validated = $request->validated();
         $recipe = new Recipe($validated);
         $recipe->save();
         foreach ($validated['ingredients'] as $recipeIngredient) {
-            $ingredient = Ingredient::firstOrNew(['name'=> $recipeIngredient['name']]);
-            if(!$ingredient->id) {
-                $ingredient->save();
-            }
-            $recipe->ingredients()->attach($ingredient->id, ['note' => $recipeIngredient['note']]);
+            $ingredient = Ingredient::firstOrCreate(['name'=> $recipeIngredient['name']]);
+            $recipe->ingredients()->attach($ingredient->id, ['note' => $recipeIngredient['notes']]);
         }
 
         $ingredients = $recipe->ingredients()->get();

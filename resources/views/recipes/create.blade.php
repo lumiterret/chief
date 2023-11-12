@@ -6,41 +6,43 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                Новый рецепт
+                Добавление рецепта
             </div>
             <div class="card-body">
-                <form class="full-width" action="{{ route('recipes.store') }}" method="post">
+                <h1>Новый рецепт</h1>
+                <form id="recipeForm" action="{{ route('recipes.store') }}" method="POST">
                     @csrf
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control @error('recipe.name') is-invalid @enderror" name="recipe[name]" placeholder="Наименование" aria-label="Наименование" value="{{old('recipe.name')}}">
-                        @error('recipe.name')
-                        <span class="error invalid-feedback">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="form-recipe-ingredients col-sm-10">
-                        <div class="input-group mb-3">
-                            <button type="button"
-                                    class="btn btn-primary btn-sm add-collection-widget">
-                                <i class="fas fa-plus-circle"></i>&nbsp;Добавить ингредиент
-                            </button>
-                        </div>
-                    </div>
-
                     <div class="mb-3">
-                        <label class="col-form-label" for="instructions">
-                            Процесс приготовления
-                        </label>
-                        <textarea
-                            class="form-control @error('recipe.instructions')is-invalid @enderror"
-                            name="recipe[instructions]"
-                            id="instructions"
-                            rows="10"
-                        >{{ old('recipe.instructions') }}</textarea>
-                        @error('recipe.instructions')
+                        <label for="recipeName" class="form-label">Название рецепта:</label>
+                        <input type="text" id="recipeName" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Наименование" aria-label="Наименование" value="{{old('name')}}" required>
+                        @error('name')
                         <span class="error invalid-feedback">{{ $message }}</span>
                         @enderror
                     </div>
-                    <button class="btn btn-primary" type="submit">Сохранить</button>
+                    <div class="mb-3">
+                        <label class="form-label">Ингредиенты:</label>
+                        <div id="ingredients" class="col-8">
+                            <!-- Ingredient inputs will be added here dynamically -->
+                        </div>
+                        <button type="button" id="addIngredientButton" class="btn btn-primary">Добавить Ингредиент</button>
+                        @error('ingredients')
+                        <span class="error invalid-feedback">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="instructions" class="form-label">Процесс приготовления:</label>
+                        <textarea id="instructions"
+                                  class="form-control @error('instructions')is-invalid @enderror"
+                                  name="instructions"
+                                  id="instructions"
+                                  rows="10"
+                                  required
+                        >{{ old('instructions') }}</textarea>
+                        @error('instructions')
+                        <span class="error invalid-feedback">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <button type="submit" class="btn btn-success">Сохранить</button>
                 </form>
             </div>
         </div>

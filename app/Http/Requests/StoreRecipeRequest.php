@@ -22,18 +22,20 @@ class StoreRecipeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'recipe.name' => ['required'],
-            'recipe.instructions' => ['required'],
-            'recipe.ingredients' => ['required', 'array'],
+            'name' => ['required'],
+            'instructions' => 'required',
+            'ingredients' => 'required|array',
+            'ingredients.*.name' => 'required|max:255',
+            'ingredients.*.notes' => 'nullable|max:500',
         ];
     }
 
     public function messages()
     {
         return [
-            'recipe.name' => 'Поле "Название" не может быть пустым',
-            'recipe.instructions' => 'Поле "Процесс приготовления" не может быть пустым',
-            'recipe.ingredients' => 'Должен присутствовать хотя бы один ингредиент',
+            'name' => 'Поле "Название" не может быть пустым',
+            'instructions' => 'Поле "Процесс приготовления" не может быть пустым',
+            'ingredients' => 'Должен присутствовать хотя бы один ингредиент',
         ];
     }
 }
