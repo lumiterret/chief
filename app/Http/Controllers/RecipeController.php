@@ -65,9 +65,22 @@ class RecipeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRecipeRequest $request, Recipe $recipe)
+    public function update(StoreRecipeRequest $request, Recipe $recipe)
     {
-        //
+        $validated = $request->validated();
+        $recipe->fill($validated)->save();
+
+        $ingredientIdsWithPivotData = [];
+        foreach ($validated['ingredients'] as $ingredientData) {
+            $ingredient = Ingredient::firstOrCreate(['name' => $ingredientData['name']]);
+
+            $ingredientIdsWithPivotData[$ingredient->id] = ['note' => $ingredientData['notes'] ?? null];
+        }
+
+        $recipe->ingredients()->sync($ingredientIdsWithPivotData);
+
+        $ingredients = $recipe->ingredients()->get();
+        return response()->view('recipes.show', compact('recipe', 'ingredients'));
     }
 
     /**

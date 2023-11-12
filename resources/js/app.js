@@ -11,18 +11,14 @@ import.meta.glob([
 
 $(document).ready(function () {
     console.log('ready')
-    var ingredientCount = 0;
+    var ingredientCount = $('.ingredient-input').length;
 
     function appendIngredientInput(name='', notes='') {
-        var ingredientDiv = $('<div class="input-group mb-2"></div>');
+        var ingredientDiv = $('<div class="ingredient-input input-group mb-2"></div>');
 
         var nameInput = $('<input type="text" name="ingredients[' + ingredientCount + '][name]" class="form-control mt-1" placeholder="Наименование" value="' + name + '" required>');
         var notesInput = $('<input type="text" name="ingredients[' + ingredientCount + '][notes]" class="form-control mt-1" placeholder="Заметки" value="' + notes + '">');
-
-        var removeButton = $('<button type="button" class="btn btn-danger mt-1">Remove</button>');
-        removeButton.click(function() {
-            ingredientDiv.remove();
-        });
+        var removeButton = $('<button type="button" class="btn btn-danger mt-1"><i class="fa-solid fa-trash-can"></i>&nbsp;Remove</button>');
 
         ingredientDiv.append(nameInput, notesInput, removeButton);
         $('#ingredients').append(ingredientDiv);
@@ -32,6 +28,10 @@ $(document).ready(function () {
 
     $('#addIngredientButton').click(function() {
         appendIngredientInput();
+    });
+
+    $(document).on('click', '.btn.btn-danger.mt-1', function() {
+        $(this).closest('.ingredient-input').remove();
     });
 
 });

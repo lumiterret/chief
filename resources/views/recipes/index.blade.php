@@ -23,6 +23,7 @@
                         <td>
                             <div class="btn-group float-end" role="group">
                                 <a href="{{ route('recipes.show', $recipe->id) }}" class="btn btn-primary"><i class="fa-solid fa-eye"></i>&nbsp;Показать</a>
+                                <a href="{{ route('recipes.edit', $recipe->id) }}" class="btn btn-primary"><i class="fa-solid fa-pen-square"></i>&nbsp;Редактировать</a>
                                 <a href="{{ route('recipes.destroy', $recipe->id) }}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i>&nbsp;</a>
                             </div>
                         </td>

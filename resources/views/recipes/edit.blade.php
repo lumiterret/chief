@@ -6,58 +6,50 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                Новый рецепт
+                Редактирование рецепта
             </div>
             <div class="card-body">
-                <form class="full-width" action="{{ route('recipes.store') }}" method="post">
+                <h1>{{$recipe->name }}</h1>
+                <form class="full-width" action="{{ route('recipes.update', $recipe->id) }}" method="post">
                     @csrf
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control @error('recipe.name') is-invalid @enderror" name="recipe[name]" placeholder="Наименование" aria-label="Наименование" value="{{old('recipe.name') ?? $recipe->name}}">
-                        @error('recipe.name')
+                    <div class="mb-3">
+                        <label for="recipeName" class="form-label">Название рецепта:</label>
+                        <input type="text" id="recipeName" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Наименование" aria-label="Наименование" value="{{old('name') ?? $recipe->name }}" required>
+                        @error('name')
                         <span class="error invalid-feedback">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="form-recipe-ingredients col-sm-10">
-                        <div class="input-group mb-3">
-                            <button type="button"
-                                    class="btn btn-primary btn-sm add-collection-widget">
-                                <i class="fas fa-plus-circle"></i>&nbsp;Добавить ингредиент
-                            </button>
+                    <div class="mb-3">
+                        <label class="form-label">Ингредиенты:</label>
+                        <div id="ingredients" class="col-8">
+                            @foreach($recipe->ingredients as $ingredient)
+                                <div class="ingredient-input input-group mb-2">
+                                    <input type="text" name="ingredients[{{ $loop->index }}][name]" class="form-control mt-1" placeholder="Наименование" value="{{ $ingredient->name }}" required="">
+                                    <input type="text" name="ingredients[{{ $loop->index }}][notes]" class="form-control mt-1" placeholder="Заметки" value="{{ $ingredient->pivot->note }}">
+                                    <button type="button" class="btn btn-danger mt-1"><i class="fa-solid fa-trash-can"></i>&nbsp;Remove</button></div>
+                            @endforeach
+                            <!-- Ingredient inputs will be added here dynamically -->
                         </div>
-                        @foreach($ingredients as $ingredient)
-                            <div class="row input-group mb-3">
-                                <div class="col-sm-5 mx-0">
-                                   <input type="text" id="recipe_ingredients_0_name" name="recipe[ingredients][{{$ingredient->id}}][name]" class="form-control-sm form-control" placeholder="Название ингредиента" value="{{ $ingredient->name }}">' +
-                                    '</div>'+
-                                '<div class="col-sm-5 mx-0">'+
-                                    '<input type="text" id="recipe_ingredients_0_note" name="recipe[ingredients]['+ i +
-                '][note]" placeholder="Заметка" class="form-control-sm form-control" value="">' +
-                                    '</div>'+
-                                '<div class="col-2">'+
-                                    '<button type="button" class="btn btn-danger btn-sm delete-collection-widget ">'+
-                                        '<i class="fas fa-minus-circle"></i>&nbsp;'+
-                                        '</button>'+
-                                    '</div>'+
-                                '</div>'
-                            {{ $ingredient->name }}
-                        @endforeach
+                        <button type="button" id="addIngredientButton" class="btn btn-primary">Добавить Ингредиент</button>
+                        @error('ingredients')
+                        <span class="error invalid-feedback">{{ $message }}</span>
+                        @enderror
                     </div>
-
                     <div class="mb-3">
                         <label class="col-form-label" for="instructions">
                             Процесс приготовления
                         </label>
                         <textarea
-                            class="form-control @error('recipe.instructions')is-invalid @enderror"
-                            name="recipe[instructions]"
+                            class="form-control @error('instructions')is-invalid @enderror"
+                            name="instructions"
                             id="instructions"
                             rows="10"
-                        >{{ old('recipe.instructions') ?? $recipe->instructions }}</textarea>
-                        @error('recipe.instructions')
+                        >{{ old('instructions') ?? $recipe->instructions }}</textarea>
+                        @error('instructions')
                         <span class="error invalid-feedback">{{ $message }}</span>
                         @enderror
                     </div>
-                    <button class="btn btn-primary" type="submit">Сохранить</button>
+                    <button type="submit" class="btn btn-success">Сохранить</button>
                 </form>
             </div>
         </div>
