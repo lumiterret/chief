@@ -36,6 +36,7 @@
                             </div>
                         </div>
                     </div>
+                    <hr>
                     <div class="container">
                         <h2 class="text-center">Недавно добавленные рецепты</h2>
                         <div id="latest-recipes">

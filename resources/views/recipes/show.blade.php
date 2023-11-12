@@ -23,10 +23,11 @@
                     </dd>
                     @endforeach
                 </dl>
-
-
-
-                {{ $recipe->instructions }}
+                <hr>
+                <h2>Процесс приготовления</h2>
+                <div class="container instructions-wrapper">
+                    @markdown{{ $recipe->instructions }}@endmarkdown
+                </div>
             </div>
         </div>
     </div>

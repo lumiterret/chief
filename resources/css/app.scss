@@ -1,0 +1,35 @@
+@import "bootstrap";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+body {
+    background-color: #d3d3d3;
+}
+.navbar-brand {
+    margin-right: 3rem;
+}
+.badge.tag {
+    color: white;
+    background-color: #218838;
+}
+.badge-secondary {
+    color: #fff;
+    background-color: #6c757d;
+}
+
+
+
+.ingredient-list {
+    padding: 0 1em;
+
+dt:nth-of-type(even), dd:nth-of-type(even) {
+    background-color: transparent;
+}
+
+dt:nth-of-type(odd), dd:nth-of-type(odd) {
+    background-color: #e9ecef;
+}
+
+dd {
+    margin-bottom: 0;
+}
+}
