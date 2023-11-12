@@ -40,7 +40,7 @@
                             Процесс приготовления
                         </label>
                         <textarea
-                            class="form-control @error('instructions')is-invalid @enderror"
+                            class="form-control @error('instructions')is-invalid @enderror markdown"
                             name="instructions"
                             id="instructions"
                             rows="10"

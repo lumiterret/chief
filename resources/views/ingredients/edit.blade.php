@@ -21,7 +21,7 @@
                             Описание ингредиента
                         </label>
                         <textarea
-                            class="form-control @error('description')is-invalid @enderror"
+                            class="form-control @error('description')is-invalid @enderror markdown"
                             name="description"
                             id="description"
                             rows="10"
