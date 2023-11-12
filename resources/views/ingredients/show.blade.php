@@ -22,13 +22,34 @@
                 @else
                     <p class="card-text">Описание не добавлено</p>
                 @endif
-                @if($recipes)
+                @if(!empty($recipes) && count($recipes))
                     <hr>
-                    @foreach($recipes as $recipe)
-                        <ul>
-                            <li><a href="{{ route('recipes.show', $recipe->id) }}">{{ $recipe->name }}</a></li>
-                        </ul>
-                    @endforeach
+                        <h2 class="recipes">
+                            <i class="fas fa-pizza-slice"></i>&nbsp;Ингредиент используется в рецептах
+                        </h2>
+
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">Название</th>
+                                <th class="text-end" scope="col">Действия</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($recipes as $recipe)
+                                <tr>
+                                    <td>{{ $recipe->name}}</td>
+                                    <td>
+                                        <div class="btn-group float-end" role="group">
+                                            <a href="{{ route('recipes.show', $recipe->id) }}" class="btn btn-primary"><i class="fa-solid fa-eye"></i>&nbsp;Показать</a>
+                                            <a href="{{ route('recipes.edit', $recipe->id) }}" class="btn btn-primary"><i class="fa-solid fa-pen-square"></i>&nbsp;Редактировать</a>
+                                            <a href="{{ route('recipes.destroy', $recipe->id) }}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i>&nbsp;</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
                 @endif
             </div>
         </div>
