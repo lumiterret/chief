@@ -8,7 +8,9 @@
             <div class="card-header d-flex">
                 <h5 class="me-auto">{{ $ingredient->name }}</h5>
                 <div class="btn-group align-items-end">
+                    @if(user())
                     <a href="{{ route('ingredients.edit', $ingredient->id) }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>&nbsp;Редактировать</a>
+                    @endif
                 </div>
             </div>
             <div class="card-body">
@@ -28,28 +30,7 @@
                             <i class="fas fa-pizza-slice"></i>&nbsp;Ингредиент используется в рецептах
                         </h2>
 
-                        <table class="table table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th scope="col">Название</th>
-                                <th class="text-end" scope="col">Действия</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($recipes as $recipe)
-                                <tr>
-                                    <td>{{ $recipe->name}}</td>
-                                    <td>
-                                        <div class="btn-group float-end" role="group">
-                                            <a href="{{ route('recipes.show', $recipe->id) }}" class="btn btn-primary"><i class="fa-solid fa-eye"></i>&nbsp;Показать</a>
-                                            <a href="{{ route('recipes.edit', $recipe->id) }}" class="btn btn-primary"><i class="fa-solid fa-pen-square"></i>&nbsp;Редактировать</a>
-                                            <a href="{{ route('recipes.destroy', $recipe->id) }}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i>&nbsp;</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                        <x-recipes.list-table :recipes="$recipes"/>
                 @endif
             </div>
         </div>

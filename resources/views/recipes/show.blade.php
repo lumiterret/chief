@@ -8,7 +8,8 @@
             <div class="card-header d-flex">
                 <h1 class="me-auto"><i class="fas fa-pizza-slice"></i>&nbsp;{{ $recipe->name }}</h1>
                 <div class="btn-group align-items-end">
-                    <a href="{{ route('recipes.edit', $recipe->id) }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>&nbsp;Редактировать</a>
+                    @if(user())<a href="{{ route('recipes.edit', $recipe->id) }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>&nbsp;Редактировать</a>
+                    @endif
                 </div>
             </div>
             <div class="card-body">
