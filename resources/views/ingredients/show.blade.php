@@ -8,7 +8,9 @@
             <div class="card-header d-flex">
                 <h5 class="me-auto">{{ $ingredient->name }}</h5>
                 <div class="btn-group align-items-end">
+                    @if(user())
                     <a href="{{ route('ingredients.edit', $ingredient->id) }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>&nbsp;Редактировать</a>
+                    @endif
                 </div>
             </div>
             <div class="card-body">
@@ -22,6 +24,12 @@
                 @else
                     <p class="card-text">Описание не добавлено</p>
                 @endif
+                @if($ingredient->recipes())
+                    <hr>
+                    <h2>Ингредиент используется в рецептах</h2>
+                    <x-recipes.list-table :recipes="$ingredient->recipes()->get()" />
+                @endif
+
             </div>
         </div>
     </div>

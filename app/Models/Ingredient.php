@@ -14,4 +14,10 @@ class Ingredient extends Model
         'name',
         'description',
     ];
+
+    public function recipes()
+    {
+        return $this->belongsToMany(Recipe::class)
+            ->withPivot('note');
+    }
 }
