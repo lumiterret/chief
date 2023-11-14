@@ -32,7 +32,7 @@
                     <div class="mb-3">
                         <label for="instructions" class="form-label">Процесс приготовления:</label>
                         <textarea id="instructions"
-                                  class="form-control @error('instructions')is-invalid @enderror"
+                                  class="form-control @error('instructions')is-invalid @enderror markdown"
                                   name="instructions"
                                   id="instructions"
                                   rows="10"
