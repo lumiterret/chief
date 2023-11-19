@@ -4,7 +4,7 @@
 set -e
 
 # скачивание последних изменений из репозитория
-git pull origin master
+git pull origin staging
 
 # перевод приложения в режим обслуживания
 php8.1 artisan down
